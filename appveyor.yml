@@ -32,8 +32,8 @@ dotnet_csproj:
 
 before_build:
   - sh: dotnet build-server shutdown
-  # Setup sonarqube
-  - sh: dotnet sonarscanner begin /o:thiagobarradas-github /k:ThiagoBarradas_jsonmasking /v:${version} /d:sonar.host.url=https://sonarcloud.io /d:sonar.login=${SONARQUBE_TOKEN} /d:sonar.cs.opencover.reportsPaths="opencover.xml" 
+  # Setup sonarqube (for commit)
+  - sh: sh sonarqube.sh
 
 build:
   project: JsonMasking.sln
@@ -71,3 +71,5 @@ deploy:
   provider: NuGet
   api_key:
     secure: csyDlyeSjDmdYAQ/PK0GYNZ4ofK/yC6vd5ZLPnG2TgujmrAW7fUiQxjDVOWD4XAX
+  on:
+    branch: master
